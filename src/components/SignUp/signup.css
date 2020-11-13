@@ -1,0 +1,34 @@
+.header {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 50px;
+}
+
+.redC {
+  border: 1px solid red;
+}
+
+.parentDiv {
+  background: url('./signupbg.png') no-repeat center center;
+  background-size: cover;
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+.formContainer {
+  background-color: #fff;
+  width: 40%;
+  margin: 0 auto;
+  border-radius: 6px;
+  padding: 30px 25px;
+}
+
+.btn-signup {
+  background-color: #230480;
+	color: white;
+}
+
+.btn-signup:hover {
+  color: #fff;
+  background-color: #3b1e94;
+}

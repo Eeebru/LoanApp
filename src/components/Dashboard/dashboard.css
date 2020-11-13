@@ -1,0 +1,32 @@
+.getStarted {
+  width: 120px;
+  height: 43px;
+  background:  #3b1e94;
+  border-radius: 6px;
+  text-decoration: none;
+  text-align: center;
+  line-height: 39px;
+  margin: 0 auto;
+}
+
+.getStart {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.getStart:hover {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.nav-item, .nav-item:hover, .nav-item:active {
+  background-color: #3b1e94 !important;
+  color: #ffffff;
+  margin-left: 5px;
+}
+
+.nav-link, .nav-link:hover, .nav-link:active {
+  background-color: #3b1e94;
+  margin-left: 5px;
+  color: #ffffff;
+}

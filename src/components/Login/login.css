@@ -1,0 +1,33 @@
+.loginParentDiv {
+	background: url("./loginBG.png") no-repeat center center;
+	background-size: cover;
+	min-width: 100vw;
+	min-height: 100vh;
+}
+
+.loginContainerDiv {
+	padding-top: 200px;
+}
+
+.loginFormDiv {
+	background-color: #fff;
+	width: 100%;
+	margin: 0 auto;
+	border-radius: 6px;
+	padding: 30px 15px;
+}
+
+.btn-flat {
+	background-color: #230480;
+	color: white;
+}
+
+.btn-flat:hover {
+  background-color: #3b1e94;
+  color: #fff;
+}
+
+
+.redC {
+	border: 1px solid red;
+}
