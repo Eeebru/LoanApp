@@ -2,3 +2,13 @@
   color:  #230480;
   background-color:  #230480;
 }
+
+.loanDetailsMember {
+  display: flex;
+  justify-content: space-between;
+}
+
+.loanDetailsMember h5 {
+  color: #230480; 
+  font-weight: bolder;
+}

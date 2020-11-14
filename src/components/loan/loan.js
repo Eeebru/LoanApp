@@ -3,10 +3,28 @@ import { Form, Col, Button, Modal } from "react-bootstrap";
 import RangeSlider from "react-bootstrap-range-slider";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import './loan.css'
+import "./loan.css";
+import ColoredLine from "../utils/hr";
 
 const Loan = (props) => {
 	const [rangeValue, setRangeValue] = useState(3000);
+	const [loanDurationValue, setLoanDurationValue] = useState(15);
+
+	function calcInterest(val) {
+		return Number((val / 100) * loanDurationValue);
+	}
+
+	function dueDate(date) {
+		const dDate = new Date(Date.now() + +date * 24 * 60 * 60 * 1000)
+			.toDateString()
+			.split(" ");
+		const obj = {
+			day: dDate[0],
+			month: dDate[1],
+			date: dDate[2],
+		};
+		return `${obj.day}, ${obj.month} ${obj.date}`;
+	}
 
 	return (
 		<div>
@@ -26,7 +44,7 @@ const Loan = (props) => {
 					</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<Form>
+					<Form className='mb-4'>
 						<Form.Group controlId='formGroupEmail'>
 							<Form.Label style={{ fontWeight: "bolder" }}>
 								Select a Loan Amount:
@@ -54,16 +72,57 @@ const Loan = (props) => {
 							</Form.Label>
 							<Form.Row>
 								<Col className='col-md-5'>
-									<Form.Control as='select' >
+									<Form.Control
+										as='select'
+										value={loanDurationValue}
+										onChange={(e) => setLoanDurationValue(e.target.value)}>
 										<option disabled>Select Duration</option>
-										<option>14 days</option>
-										<option>30 days</option>
+										<option value='15'>15 days</option>
+										<option value='30'>30 days</option>
 									</Form.Control>
 								</Col>
 							</Form.Row>
 						</Form.Group>
 					</Form>
-          
+					<ColoredLine color='#230480' />
+					<div>
+						<h6 style={{ fontWeight: "bolder" }}>Loan details</h6>
+						<div
+							style={{
+								border: "#230480 2px dotted",
+								borderRadius: "10px",
+								padding: "10px",
+							}}>
+							<div className='loanDetailsMember'>
+								<p>Principal Amount</p>
+								<h5>{`#${rangeValue}`}</h5>
+							</div>
+							<div className='loanDetailsMember'>
+								<p>Interest</p>
+								<h5>
+									{" "}
+									<span
+										style={{
+											fontSize: "12px",
+											fontWeight: "normal",
+										}}>{`(${loanDurationValue}%)`}</span>{" "}
+									{`#${calcInterest(rangeValue)}`}
+								</h5>
+							</div>
+							<div className='loanDetailsMember'>
+								<p>Loan Amount Due</p>
+								<h5>{`#${+rangeValue + calcInterest(rangeValue)}`}</h5>
+							</div>
+							<div className='loanDetailsMember'>
+								<p>Loan Period</p>
+								<h5>{`${loanDurationValue} days`}</h5>
+							</div>
+							<div className='loanDetailsMember'>
+								<p>Due Date</p>
+								<h5>{`${dueDate(loanDurationValue)}`}</h5>
+							</div>
+						</div>
+					</div>
 				</Modal.Body>
 				<Modal.Footer>
 					<Button
