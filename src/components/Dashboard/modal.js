@@ -10,7 +10,7 @@ import Toast from "react-bootstrap/Toast";
 const DashModal = (props) => {
 	// const history = useHistory();
 
-	const [isLoading, setLoading] = useState(false);
+	const [showToast, setShowToast] = useState(false);
 
 	
 
@@ -43,13 +43,10 @@ const DashModal = (props) => {
 					</Form>
 				</Modal.Body>
 				<Modal.Footer>
-					{/* <Button variant='secondary' onClick={props.onHide}>
-					Close
-				</Button> */}
 					<Button
 						onClick={() => {
 							props.onHide();
-							setLoading(true);
+							setShowToast(true);
 						}}
 						variant='flat'
 						className='btn-flat'>
@@ -57,7 +54,7 @@ const DashModal = (props) => {
 					</Button>
 				</Modal.Footer>
 			</Modal>
-			{isLoading && (
+			{showToast && (
 				<div
 					aria-live='polite'
 					aria-atomic='true'
@@ -71,8 +68,8 @@ const DashModal = (props) => {
 					<Toast
 						delay={4000}
 						autohide
-						show={isLoading}
-						onClose={() => setLoading(false)}
+						show={showToast}
+						onClose={() => setShowToast(false)}
 						style={{
 							position: "absolute",
 							top: 0,

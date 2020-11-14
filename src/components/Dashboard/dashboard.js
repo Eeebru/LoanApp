@@ -1,10 +1,5 @@
 import React, {useEffect} from "react";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-// import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
+import {Col,Row, Card, Container, Nav} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -15,7 +10,8 @@ import Loan from "../loan/loan";
 
 const Dashboard = () => {
 	const [modalShow, setModalShow] = React.useState(false);
-	const [showLoan, setShowLoan] = React.useState(false);
+	const [loanModalShow, setloanModalShow] = React.useState(false);
+	const [showLoanBtn, setShowLoanBtn] = React.useState(false);
 
   function simulateNetworkRequest() {
 		return new Promise((resolve) => {
@@ -24,7 +20,7 @@ const Dashboard = () => {
 	}
 
 	useEffect(() => {
-		simulateNetworkRequest().then(() => setShowLoan(true));
+		simulateNetworkRequest().then(() => setShowLoanBtn(true));
 	}, []);
 	const simulateLoanHistory = [];
 
@@ -65,13 +61,18 @@ const Dashboard = () => {
 						</Card>
 					</Col>
 					<Col md={{ span: 4, offset: 3 }}>
-						{showLoan ? (
+						{showLoanBtn ? (
 							<div>
 								<h3 className='py-3' style={{ textAlign: "center" }}>
 									We are here for you.
 								</h3>
 								<div className='getStarted'>
-									<Link to='/loan' className='getStart'>Take a Loan</Link>
+									<Link
+										onClick={() => setloanModalShow(true)}
+										// to='/loan'
+										className='getStart'>
+										Take a Loan
+									</Link>
 								</div>
 							</div>
 						) : (
@@ -93,7 +94,7 @@ const Dashboard = () => {
 					show={modalShow}
 					onHide={() => setModalShow(false)}
 				/>
-        <Loan />
+				<Loan show={loanModalShow} />
 
 				<h4 className='text-center'>Your Loan History</h4>
 				<div>
