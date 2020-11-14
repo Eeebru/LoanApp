@@ -66,7 +66,7 @@ const Dashboard = () => {
 								<h3 className='py-3' style={{ textAlign: "center" }}>
 									We are here for you.
 								</h3>
-								<div className='getStarted'>
+								<div  className='getStarted'>
 									<Link
 										onClick={() => setloanModalShow(true)}
 										// to='/loan'

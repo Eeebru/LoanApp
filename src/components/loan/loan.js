@@ -3,7 +3,6 @@ import { Form, Col, Button, Modal } from "react-bootstrap";
 import RangeSlider from "react-bootstrap-range-slider";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/css/bootstrap.css";
 import './loan.css'
 
 const Loan = (props) => {
@@ -30,7 +29,7 @@ const Loan = (props) => {
 					<Form>
 						<Form.Group controlId='formGroupEmail'>
 							<Form.Label style={{ fontWeight: "bolder" }}>
-								Select a loan amount:
+								Select a Loan Amount:
 							</Form.Label>
 							<br />
 							<RangeSlider
@@ -41,8 +40,6 @@ const Loan = (props) => {
 								value={rangeValue}
 								onChange={(e) => setRangeValue(e.target.value)}
 								step={3000}
-								variant='secondary'
-								className='rangeSlid'
 							/>
 							<Form.Row>
 								<Col className='col-md-2'>
@@ -53,18 +50,20 @@ const Loan = (props) => {
 
 						<Form.Group controlId='formGroupEmail'>
 							<Form.Label style={{ fontWeight: "bolder" }}>
-								Select a loan amount:
+								Select Your Loan Duration:
 							</Form.Label>
 							<Form.Row>
-								<Col>
-									<Form.Control placeholder='First name' />
-								</Col>
-								<Col>
-									<Form.Control placeholder='Last name' />
+								<Col className='col-md-5'>
+									<Form.Control as='select' >
+										<option disabled>Select Duration</option>
+										<option>14 days</option>
+										<option>30 days</option>
+									</Form.Control>
 								</Col>
 							</Form.Row>
 						</Form.Group>
 					</Form>
+          
 				</Modal.Body>
 				<Modal.Footer>
 					<Button
