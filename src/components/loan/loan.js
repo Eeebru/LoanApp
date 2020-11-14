@@ -25,13 +25,12 @@ const Loan = (props) => {
 			date: dDate[2],
 		};
 		return `${obj.day}, ${obj.month} ${obj.date}`;
-  }
-  
-  const handleSubmit = ()=> {
-    props.onHide()
-    setShowAlert(true)
-  }
+	}
 
+	const handleSubmit = () => {
+		props.onHide();
+		setShowAlert(true);
+	};
 
 	return (
 		<div>
@@ -138,7 +137,7 @@ const Loan = (props) => {
 					</Button>
 				</Modal.Footer>
 			</Modal>
-			(
+
 			{showAlert && (
 				<div
 					aria-live='polite'
@@ -168,7 +167,6 @@ const Loan = (props) => {
 					</Toast>
 				</div>
 			)}
-			)
 		</div>
 	);
 };
