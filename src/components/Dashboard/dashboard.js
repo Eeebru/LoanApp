@@ -11,6 +11,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./dashboard.css";
 import cardPic from "./mastercard.jpg";
 import DashModal from "./modal";
+import Loan from "../loan/loan";
 
 const Dashboard = () => {
 	const [modalShow, setModalShow] = React.useState(false);
@@ -70,7 +71,7 @@ const Dashboard = () => {
 									We are here for you.
 								</h3>
 								<div className='getStarted'>
-									<Link className='getStart'>Take a Loan</Link>
+									<Link to='/loan' className='getStart'>Take a Loan</Link>
 								</div>
 							</div>
 						) : (
@@ -92,6 +93,7 @@ const Dashboard = () => {
 					show={modalShow}
 					onHide={() => setModalShow(false)}
 				/>
+        <Loan />
 
 				<h4 className='text-center'>Your Loan History</h4>
 				<div>
