@@ -5,10 +5,8 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Toast from "react-bootstrap/Toast";
 
-// import { useHistory, Redirect } from "react-router";
 
 const DashModal = (props) => {
-	// const history = useHistory();
 
 	const [showToast, setShowToast] = useState(false);
 
@@ -76,7 +74,7 @@ const DashModal = (props) => {
 							right: 0,
 						}}>
 						<Toast.Header>Successfull!</Toast.Header>
-						<Toast.Body>Card added successfully</Toast.Body>
+						<Toast.Body>Your Card has been added successfully</Toast.Body>
 					</Toast>
 				</div>
 			)}

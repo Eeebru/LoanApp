@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Col, Button, Modal } from "react-bootstrap";
+import { Form, Col, Button, Modal, Toast } from "react-bootstrap";
 import RangeSlider from "react-bootstrap-range-slider";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -7,6 +7,7 @@ import "./loan.css";
 import ColoredLine from "../utils/hr";
 
 const Loan = (props) => {
+	const [showAlert, setShowAlert] = useState(false);
 	const [rangeValue, setRangeValue] = useState(3000);
 	const [loanDurationValue, setLoanDurationValue] = useState(15);
 
@@ -24,7 +25,13 @@ const Loan = (props) => {
 			date: dDate[2],
 		};
 		return `${obj.day}, ${obj.month} ${obj.date}`;
-	}
+  }
+  
+  const handleSubmit = ()=> {
+    props.onHide()
+    setShowAlert(true)
+  }
+
 
 	return (
 		<div>
@@ -38,8 +45,8 @@ const Loan = (props) => {
 				<Modal.Header closeButton>
 					<Modal.Title id='contained-modal-title-vcenter'>
 						<h5 className='text-center'>
-							Congratulations,you have been approved for a loan Please select
-							aloan offer below.
+							Congratulations,you have been approved for a loan Please select a
+							loan offer below.
 						</h5>
 					</Modal.Title>
 				</Modal.Header>
@@ -95,7 +102,7 @@ const Loan = (props) => {
 							}}>
 							<div className='loanDetailsMember'>
 								<p>Principal Amount</p>
-								<h5>{`#${rangeValue}`}</h5>
+								<h5>&#8358;{`${rangeValue}`}</h5>
 							</div>
 							<div className='loanDetailsMember'>
 								<p>Interest</p>
@@ -106,12 +113,13 @@ const Loan = (props) => {
 											fontSize: "12px",
 											fontWeight: "normal",
 										}}>{`(${loanDurationValue}%)`}</span>{" "}
-									{`#${calcInterest(rangeValue)}`}
+									&#8358;
+									{`${calcInterest(rangeValue)}`}
 								</h5>
 							</div>
 							<div className='loanDetailsMember'>
 								<p>Loan Amount Due</p>
-								<h5>{`#${+rangeValue + calcInterest(rangeValue)}`}</h5>
+								<h5>&#8358;{`${+rangeValue + calcInterest(rangeValue)}`}</h5>
 							</div>
 							<div className='loanDetailsMember'>
 								<p>Loan Period</p>
@@ -125,16 +133,42 @@ const Loan = (props) => {
 					</div>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button
-						onClick={() => {
-							props.onHide();
-						}}
-						variant='flat'
-						className='btn-flat'>
+					<Button onClick={handleSubmit} variant='flat' className='btn-flat'>
 						Confirm
 					</Button>
 				</Modal.Footer>
 			</Modal>
+			(
+			{showAlert && (
+				<div
+					aria-live='polite'
+					aria-atomic='true'
+					style={{
+						position: "absolute",
+						minHeight: "100px",
+						minWidth: "350px",
+						top: 30,
+						right: 230,
+					}}>
+					<Toast
+						delay={5000}
+						autohide
+						show={showAlert}
+						onClose={() => setShowAlert(false)}
+						style={{
+							position: "absolute",
+							top: 0,
+							right: 0,
+						}}>
+						<Toast.Header>Successfull!</Toast.Header>
+						<Toast.Body style={{ color: "#230480", fontSize: "16px" }}>
+							Your Loan Has been Placed Successfully, Credit Alert is on Your
+							Way
+						</Toast.Body>
+					</Toast>
+				</div>
+			)}
+			)
 		</div>
 	);
 };
