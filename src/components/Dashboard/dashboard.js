@@ -13,6 +13,7 @@ const Dashboard = () => {
 	const [modalShow, setModalShow] = React.useState(false);
 	const [loanModalShow, setloanModalShow] = React.useState(false);
 	const [showLoanBtn, setShowLoanBtn] = React.useState(false);
+	const [loadLoans, setLoadLoans] = React.useState('');
   const userData = JSON.parse(localStorage.getItem('loginData'))
   console.log(userData);
   function simulateNetworkRequest() {

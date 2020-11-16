@@ -6,7 +6,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./loan.css";
 import ColoredLine from "../utils/hr";
 
+
+const BASEURL = "http://localhost:1111";
+// const BASEURL2 = "https:loanappbe.herokuapp.com";
+
 const Loan = (props) => {
+  // const [showOrHideModal, setShowOrHideMode] = useState(props.onHide())
+	const [backendVal, setBackendVal] = useState("");
 	const [showAlert, setShowAlert] = useState(false);
 	const [rangeValue, setRangeValue] = useState(3000);
 	const [loanDurationValue, setLoanDurationValue] = useState(15);
@@ -25,11 +31,35 @@ const Loan = (props) => {
 			date: dDate[2],
 		};
 		return `${obj.day}, ${obj.month} ${obj.date}`;
-	}
+  }
+  
+  const loanObj = {
+		principalAmount: rangeValue,
+		interestAmount: calcInterest(rangeValue),
+		amountDue: +rangeValue + calcInterest(rangeValue),
+		dueDate: dueDate(loanDurationValue),
+		loanPeriod: `${loanDurationValue} days`,
+	};
 
-	const handleSubmit = () => {
-		props.onHide();
-		setShowAlert(true);
+	const handleSubmit = async () => {
+    const requestOptions = {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				"Access-Control-Allow-Origin": "*",
+				authorization: `Bearer ${JSON.parse(localStorage.getItem("loginData")).token}`,
+			},
+			body: JSON.stringify(loanObj),
+		};
+		const fetchdata = await fetch(`${BASEURL}/api/takeloan`, requestOptions);
+		const jsonData = await fetchdata.json();
+    setBackendVal(jsonData);
+    console.log(jsonData);
+
+    if (jsonData.success === true) {
+      setShowAlert(true);
+      props.onHide();
+    }
 	};
 
 	return (
@@ -51,7 +81,7 @@ const Loan = (props) => {
 				</Modal.Header>
 				<Modal.Body>
 					<Form className='mb-4'>
-						<Form.Group controlId='formGroupEmail'>
+						<Form.Group>
 							<Form.Label style={{ fontWeight: "bolder" }}>
 								Select a Loan Amount:
 							</Form.Label>
@@ -72,7 +102,7 @@ const Loan = (props) => {
 							</Form.Row>
 						</Form.Group>
 
-						<Form.Group controlId='formGroupEmail'>
+						<Form.Group>
 							<Form.Label style={{ fontWeight: "bolder" }}>
 								Select Your Loan Duration:
 							</Form.Label>
@@ -136,6 +166,11 @@ const Loan = (props) => {
 						Confirm
 					</Button>
 				</Modal.Footer>
+				<div className='text-center'>
+					<h6 style={{ color: "red" }}>
+						{backendVal.success ===false ? backendVal.message : null}
+					</h6>
+				</div>
 			</Modal>
 
 			{showAlert && (
@@ -150,7 +185,7 @@ const Loan = (props) => {
 						right: 230,
 					}}>
 					<Toast
-						delay={5000}
+						delay={8000}
 						autohide
 						show={showAlert}
 						onClose={() => setShowAlert(false)}
