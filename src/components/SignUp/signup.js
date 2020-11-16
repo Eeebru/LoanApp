@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Container, Form, Col, Row, Button, InputGroup } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
-// import addLocalstorage from "../utils/localstorage";
 
 import "./signup.css";
 import Hr from "../utils/hr";
@@ -20,7 +19,7 @@ const SignUp = () => {
 	const [formPassword, setFormPassword] = useState(null);
 	const [formConfirmPass, setFormConfirmPass] = useState(null);
 
-	const axiosData = {
+	const formData = {
 		name: formName,
 		email: formEmail,
 		bvn: formBVN,
@@ -37,13 +36,12 @@ const SignUp = () => {
 				"Content-Type": "application/json",
 				"Access-Control-Allow-Origin": "*",
 			},
-			body: JSON.stringify(axiosData),
+			body: JSON.stringify(formData),
 		};
 		const fetchdata = await fetch(`${BASEURL}/api/signup`, requestOptions);
 		const jsonData = await fetchdata.json();
 		setLoginData(jsonData);
 	};
-	console.log("from loginData>>>>>>", loginData);
 
 	return (
 		<div className=' parentDiv'>
@@ -159,7 +157,7 @@ const SignUp = () => {
 						</div>
 					</Form>
 					<div className='text-center'>
-						<h6>{loginData ? loginData.message : null}</h6>
+						<h6 style={{color: loginData.success === false? 'red' : 'green'}}>{loginData ? loginData.message : null}</h6>
 					</div>
 				</div>
 			</Container>
