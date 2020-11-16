@@ -1,5 +1,5 @@
 import React from "react";
-import moment from "moment";
+import dayjs from "dayjs";
 import { Col, Row, Card, Container, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -85,7 +85,7 @@ const Dashboard = () => {
 						</Card>
 					</Col>
 					<Col md={{ span: 4, offset: 3 }}>
-						{showLoanBtn ? (
+						{showLoanBtn || loansArray.length > 0 ? (
 							<div>
 								<h3 className='py-3' style={{ textAlign: "center" }}>
 									We are here for you.
@@ -110,7 +110,10 @@ const Dashboard = () => {
 										className='getStart'
 										onClick={() => {
 											initializePayment(onSuccess, onClose);
-										}}> Add your card </Link>
+										}}>
+										{" "}
+										Add your card{" "}
+									</Link>
 								</div>
 							</div>
 						)}
@@ -144,8 +147,8 @@ const Dashboard = () => {
 								return (
 									<tr>
 										<td>
-											{moment(new Date(loanHistory.startDate))
-												.format("MMM Do YYYY")
+											{dayjs(new Date(loanHistory.startDate))
+												.format("MMM D YYYY")
 												.toString()}
 										</td>
 										<td>{loanHistory.principalAmount}</td>
