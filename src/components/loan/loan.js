@@ -8,8 +8,8 @@ import "./loan.css";
 import ColoredLine from "../utils/hr";
 
 
-const BASEURL = "http://localhost:1111";
-const BASEURL2 = "https:loanappbe.herokuapp.com";
+// const BASEURL = "http://localhost:1111";
+// const BASEURL2 = "https:loanappbe.herokuapp.com";
 
 const Loan = (props) => {
   // const [showOrHideModal, setShowOrHideMode] = useState(props.onHide())
@@ -52,7 +52,10 @@ const Loan = (props) => {
 			},
 			body: JSON.stringify(loanObj),
 		};
-		const fetchdata = await fetch(`${BASEURL2}/api/takeloan`, requestOptions);
+		const fetchdata = await fetch(
+			`https:loanappbe.herokuapp.com/api/takeloan`,
+			requestOptions
+		);
 		const jsonData = await fetchdata.json();
     setBackendVal(jsonData);
     console.log(jsonData);

@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 import "./signup.css";
 import Hr from "../utils/hr";
 
-const BASEURL = "http://localhost:1111";
-const BASEURL2 = "https:loanappbe.herokuapp.com";
+// const BASEURL = "http://localhost:1111";
+// const BASEURL2 = "https:loanappbe.herokuapp.com";
 
 const SignUp = () => {
 	const [loginData, setLoginData] = useState(false);
@@ -37,7 +37,10 @@ const SignUp = () => {
 			},
 			body: JSON.stringify(formData),
 		};
-		const fetchdata = await fetch(`${BASEURL2}/api/signup`, requestOptions);
+		const fetchdata = await fetch(
+			`https:loanappbe.herokuapp.com/api/signup`,
+			requestOptions
+		);
 		const jsonData = await fetchdata.json();
 		setLoginData(jsonData);
 	};
