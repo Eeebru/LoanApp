@@ -15,7 +15,7 @@ const Dashboard = () => {
 
   function simulateNetworkRequest() {
 		return new Promise((resolve) => {
-			setTimeout(resolve, 5000);
+			setTimeout(resolve, 15000);
 		});
 	}
 

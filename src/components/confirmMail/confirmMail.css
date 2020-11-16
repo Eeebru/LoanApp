@@ -1,0 +1,49 @@
+.SuccessPage {
+  min-width: 100vw;
+  min-height: 100vh;
+  background-color: #e5e5e5;
+  position: relative;
+}
+
+.SuccessBox {
+  position: absolute;
+  width: 488px;
+  height: 358px;
+  background-color: white;
+  border-radius: 15.85px;
+  top: 20%;
+  left: 35%;
+}
+
+.Container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.text {
+  font-size: 16px;
+  line-height: 21px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.doneBtn {
+  background:#230480;
+  border-radius: 6px;
+  width: min(30%, 30%);
+  height: 51px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.doneBtn:hover {
+  opacity: 0.8;
+}
+
+.doneBtn:focus {
+  outline: none;
+  opacity: 0.75;
+}

@@ -1,36 +1,49 @@
-import React, { useState, useEffect } from "react";
-import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Button from "react-bootstrap/Button";
+import React, { useState } from "react";
+import { Container, Form, Col, Row, Button, InputGroup } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import InputGroup from "react-bootstrap/InputGroup";
 import { Link } from "react-router-dom";
+// import addLocalstorage from "../utils/localstorage";
 
 import "./signup.css";
 import Hr from "../utils/hr";
 
-const SignUp = () => {
-	const [validated, setValidated] = useState(false);
-	const [isLoading, setLoading] = useState(false);
+const BASEURL = "http://localhost:1111";
+// const BASEURL2 = "https:loanappbe.herokuapp.com";
 
-	const handleSubmit = (event) => {
-		const form = event.currentTarget;
-		if (form.checkValidity() === false) {
-			event.preventDefault();
-			event.stopPropagation();
-		}
-		setValidated(true);
-		//set true when database data arrived; TODO
-		setLoading(true);
+const SignUp = () => {
+	const [loginData, setLoginData] = useState(false);
+	// const [isLoading, setLoading] = useState(false);
+	const [formName, setFormName] = useState(null);
+	const [formPhone, setFormPhone] = useState(null);
+	const [formBVN, setFormBVN] = useState(null);
+	const [formEmail, setFormEmail] = useState(null);
+	const [formPassword, setFormPassword] = useState(null);
+	const [formConfirmPass, setFormConfirmPass] = useState(null);
+
+	const axiosData = {
+		name: formName,
+		email: formEmail,
+		bvn: formBVN,
+		phone: formPhone,
+		password: formPassword,
+		confirmPass: formConfirmPass,
 	};
 
-	useEffect(() => {
-		if (isLoading) {
-			setLoading(false);
-		}
-	}, [isLoading]);
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		const requestOptions = {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				"Access-Control-Allow-Origin": "*",
+			},
+			body: JSON.stringify(axiosData),
+		};
+		const fetchdata = await fetch(`${BASEURL}/api/signup`, requestOptions);
+		const jsonData = await fetchdata.json();
+		setLoginData(jsonData);
+	};
+	console.log("from loginData>>>>>>", loginData);
 
 	return (
 		<div className=' parentDiv'>
@@ -39,18 +52,18 @@ const SignUp = () => {
 				<div className='formContainer'>
 					<h2>Please SignUp Here</h2>
 					<Hr color='#230480' />
-					<Form noValidate validated={validated} onSubmit={handleSubmit}>
+					<Form>
 						<Form.Group as={Row} controlId='formName'>
 							<Form.Label column sm='3'>
 								Name:
 							</Form.Label>
 							<Col sm='9'>
-								<InputGroup>
-									<Form.Control required type='text' />
-									<Form.Control.Feedback type='invalid'>
-										Name is required.
-									</Form.Control.Feedback>
-								</InputGroup>
+								<Form.Control
+									required
+									type='text'
+									value={formName}
+									onChange={(e) => setFormName(e.target.value)}
+								/>
 							</Col>
 						</Form.Group>
 						<Form.Group as={Row} controlId='formPhone'>
@@ -67,12 +80,11 @@ const SignUp = () => {
 									<Form.Control
 										type='text'
 										placeholder='8161814763'
-										aria-describedby='inputGroupPrepend'
+										// aria-describedby='inputGroupPrepend'
 										required
+										value={formPhone}
+										onChange={(e) => setFormPhone(e.target.value)}
 									/>
-									<Form.Control.Feedback type='invalid'>
-										Please choose a valid phone number.
-									</Form.Control.Feedback>
 								</InputGroup>
 							</Col>
 						</Form.Group>
@@ -81,12 +93,12 @@ const SignUp = () => {
 								BVN:
 							</Form.Label>
 							<Col sm='9'>
-								<InputGroup>
-									<Form.Control required type='text' />
-									<Form.Control.Feedback type='invalid'>
-										BVN is required.
-									</Form.Control.Feedback>
-								</InputGroup>
+								<Form.Control
+									required
+									type='text'
+									value={formBVN}
+									onChange={(e) => setFormBVN(e.target.value)}
+								/>
 							</Col>
 						</Form.Group>
 						<Form.Group as={Row} controlId='formEmail'>
@@ -94,12 +106,12 @@ const SignUp = () => {
 								Email:
 							</Form.Label>
 							<Col sm='9'>
-								<InputGroup>
-									<Form.Control required type='email' />
-									<Form.Control.Feedback type='invalid'>
-										Please choose a valid Email.
-									</Form.Control.Feedback>
-								</InputGroup>
+								<Form.Control
+									required
+									type='email'
+									value={formEmail}
+									onChange={(e) => setFormEmail(e.target.value)}
+								/>
 							</Col>
 						</Form.Group>
 						<Form.Group as={Row} controlId='formPassword'>
@@ -107,12 +119,12 @@ const SignUp = () => {
 								Password:
 							</Form.Label>
 							<Col sm='9'>
-								<InputGroup>
-									<Form.Control required type='password' />
-									<Form.Control.Feedback type='invalid'>
-										Password must be more than 8 digits.
-									</Form.Control.Feedback>
-								</InputGroup>
+								<Form.Control
+									required
+									type='password'
+									value={formPassword}
+									onChange={(e) => setFormPassword(e.target.value)}
+								/>
 							</Col>
 						</Form.Group>
 						<Form.Group as={Row} controlId='formConfirmPassword'>
@@ -120,22 +132,22 @@ const SignUp = () => {
 								Confirm Password:
 							</Form.Label>
 							<Col sm='9'>
-								<InputGroup>
-									<Form.Control required type='password' />
-									<Form.Control.Feedback type='invalid'>
-										Password does not match.
-									</Form.Control.Feedback>
-								</InputGroup>
+								<Form.Control
+									required
+									type='password'
+									value={formConfirmPass}
+									onChange={(e) => setFormConfirmPass(e.target.value)}
+								/>
 							</Col>
 						</Form.Group>
 						<Button
 							type='submit'
 							variant='signup'
 							className='btn-signup'
-							disabled={isLoading}
-							onClick={!isLoading ? handleSubmit : null}
+							// disabled={!loginData}
+							onClick={handleSubmit}
 							block>
-							{isLoading ? "Please wait" : "Register"}
+							Register
 						</Button>
 						<div className='d-flex justify-content-end mt-2'>
 							<p style={{ fontSize: "14px" }}>
@@ -146,6 +158,9 @@ const SignUp = () => {
 							</p>
 						</div>
 					</Form>
+					<div className='text-center'>
+						<h6>{loginData ? loginData.message : null}</h6>
+					</div>
 				</div>
 			</Container>
 		</div>
