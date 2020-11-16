@@ -13,7 +13,7 @@ import Hr from "../utils/hr";
 import "./login.css";
 
 const BASEURL = "http://localhost:1111";
-// const BASEURL2 = "https:loanappbe.herokuapp.com";
+const BASEURL2 = "https:loanappbe.herokuapp.com";
 
 const Login = () => {
 	const history = useHistory();
@@ -37,7 +37,7 @@ const Login = () => {
 			},
 			body: JSON.stringify(formObj),
 		};
-		const fetchdata = await fetch(`${BASEURL}/api/login`, requestOptions);
+		const fetchdata = await fetch(`${BASEURL2}/api/login`, requestOptions);
 		const jsonData = await fetchdata.json();
 		setBackendVal(jsonData);
 
@@ -106,7 +106,7 @@ const Login = () => {
 									variant='flat'
 									className='btn-flat'
 									block>
-									{"Register"}
+									{"Login"}
 								</Button>
 								<div className='d-flex justify-content-end mt-2'>
 									<p style={{ fontSize: "14px" }}>

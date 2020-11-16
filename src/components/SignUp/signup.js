@@ -7,11 +7,10 @@ import "./signup.css";
 import Hr from "../utils/hr";
 
 const BASEURL = "http://localhost:1111";
-// const BASEURL2 = "https:loanappbe.herokuapp.com";
+const BASEURL2 = "https:loanappbe.herokuapp.com";
 
 const SignUp = () => {
 	const [loginData, setLoginData] = useState(false);
-	// const [isLoading, setLoading] = useState(false);
 	const [formName, setFormName] = useState(null);
 	const [formPhone, setFormPhone] = useState(null);
 	const [formBVN, setFormBVN] = useState(null);
@@ -38,7 +37,7 @@ const SignUp = () => {
 			},
 			body: JSON.stringify(formData),
 		};
-		const fetchdata = await fetch(`${BASEURL}/api/signup`, requestOptions);
+		const fetchdata = await fetch(`${BASEURL2}/api/signup`, requestOptions);
 		const jsonData = await fetchdata.json();
 		setLoginData(jsonData);
 	};
@@ -142,10 +141,10 @@ const SignUp = () => {
 							type='submit'
 							variant='signup'
 							className='btn-signup'
-							// disabled={!loginData}
+							disabled={loginData}
 							onClick={handleSubmit}
 							block>
-							Register
+							{!loginData ? "Register" : "Please Wait"}
 						</Button>
 						<div className='d-flex justify-content-end mt-2'>
 							<p style={{ fontSize: "14px" }}>

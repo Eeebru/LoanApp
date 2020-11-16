@@ -9168,6 +9168,11 @@ react-overlays@^4.1.0:
     uncontrollable "^7.0.0"
     warning "^4.0.3"
 
+react-paystack@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/react-paystack/-/react-paystack-3.0.2.tgz#da2237e750fd818e3496b12ed8131dc79f16962f"
+  integrity sha512-bSiyb0a+DpBhTeyh0jZ0XERuwmZ1Q7Ryje9OLRvpCjkt8c9jW/VP+MhPo0pC4laA7ejS3fxdAqmx6CY84Fx/tw==
+
 react-refresh@^0.8.3:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.8.3.tgz#721d4657672d400c5e3c75d063c4a85fb2d5d68f"
