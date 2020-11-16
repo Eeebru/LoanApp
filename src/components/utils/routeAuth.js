@@ -4,10 +4,10 @@ import { Redirect } from 'react-router';
 
 
 
-const withAuth = (Component) => {
+const WithAuth = (Component) => {
 	const AuthRoute = () => {
-		const isAuth = !!localStorage.getItem("token");
-		if (isAuth) {
+    const isAuth = JSON.parse(localStorage.getItem("loginData"));
+		if (isAuth.token) {
 			return <Component />;
 		} else {
 			return <Redirect to='/' />;
@@ -17,4 +17,4 @@ const withAuth = (Component) => {
 	return AuthRoute;
 };
 
-export default withAuth;
+export default WithAuth;

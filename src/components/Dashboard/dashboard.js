@@ -7,12 +7,14 @@ import "./dashboard.css";
 import cardPic from "./mastercard.jpg";
 import DashModal from "./modal";
 import Loan from "../loan/loan";
+import WithAuth from "../utils/routeAuth";
 
 const Dashboard = () => {
 	const [modalShow, setModalShow] = React.useState(false);
 	const [loanModalShow, setloanModalShow] = React.useState(false);
 	const [showLoanBtn, setShowLoanBtn] = React.useState(false);
-
+  const userData = JSON.parse(localStorage.getItem('loginData'))
+  console.log(userData);
   function simulateNetworkRequest() {
 		return new Promise((resolve) => {
 			setTimeout(resolve, 15000);
@@ -28,7 +30,7 @@ const Dashboard = () => {
 		<div>
 			<Container className='p-4'>
 				<Row className='mt-5 py-4'>
-					<h2>Welcome {"Ibrahim"}</h2>
+					<h2>Welcome {userData.user.name}</h2>
 				</Row>
 				<Row className='py-4'>
 					<Col md={5}>
@@ -129,4 +131,4 @@ const Dashboard = () => {
 	);
 };
 
-export default Dashboard;
+export default WithAuth(Dashboard);
