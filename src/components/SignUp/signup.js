@@ -7,7 +7,7 @@ import "./signup.css";
 import Hr from "../utils/hr";
 
 // const BASEURL = "http://localhost:1111";
-// const BASEURL2 = "https:loanappbe.herokuapp.com";
+const BASEURL2 = "https://loanappbe.herokuapp.com";
 
 const SignUp = () => {
 	const [loginData, setLoginData] = useState(false);
@@ -27,23 +27,23 @@ const SignUp = () => {
 		confirmPass: formConfirmPass,
 	};
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		const requestOptions = {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-				// "Access-Control-Allow-Origin": "*",
-			},
-			body: JSON.stringify(formData),
-		};
-		const fetchdata = await fetch(
-			`api/signup`,
-			requestOptions
-		);
-		const jsonData = await fetchdata.json();
-		setLoginData(jsonData);
-	};
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      // "Access-Control-Allow-Origin": "*",
+    },
+    body: JSON.stringify(formData),
+  };
+  const fetchdata = await fetch(
+    `${BASEURL2}/api/signup`,
+    requestOptions
+  );
+  const jsonData = await fetchdata.json();
+  setLoginData(jsonData);
+};
 
 	return (
 		<div className=' parentDiv'>

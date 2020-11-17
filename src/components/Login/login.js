@@ -13,7 +13,7 @@ import Hr from "../utils/hr";
 import "./login.css";
 
 // const BASEURL = "http://localhost:1111";
-// const BASEURL2 = "https:loanappbe.herokuapp.com";
+const BASEURL2 = "https://loanappbe.herokuapp.com";
 
 const Login = () => {
 	const history = useHistory();
@@ -38,7 +38,7 @@ const Login = () => {
 			body: JSON.stringify(formObj),
 		};
 		const fetchdata = await fetch(
-			`api/login`,
+			`${BASEURL2}/api/login`,
 			requestOptions
 		);
 		const jsonData = await fetchdata.json();
