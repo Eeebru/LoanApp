@@ -7,7 +7,8 @@ import "./signup.css";
 import Hr from "../utils/hr";
 
 // const BASEURL = "http://localhost:1111";
-const BASEURL2 = "https://loanappbe.herokuapp.com";
+const BASEURL2 =
+	"https://cors-anywhere.herokuapp.com/https://loanappbe.herokuapp.com";
 
 const SignUp = () => {
 	const [loginData, setLoginData] = useState(false);

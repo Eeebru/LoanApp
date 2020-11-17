@@ -13,7 +13,8 @@ import Hr from "../utils/hr";
 import "./login.css";
 
 // const BASEURL = "http://localhost:1111";
-const BASEURL2 = "https://loanappbe.herokuapp.com";
+const BASEURL2 =
+	"https://cors-anywhere.herokuapp.com/https://loanappbe.herokuapp.com";
 
 const Login = () => {
 	const history = useHistory();

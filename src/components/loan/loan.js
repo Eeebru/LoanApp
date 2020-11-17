@@ -9,7 +9,8 @@ import ColoredLine from "../utils/hr";
 
 
 // const BASEURL = "http://localhost:1111";
-const BASEURL2 = "https://loanappbe.herokuapp.com";
+const BASEURL2 =
+	"https://cors-anywhere.herokuapp.com/https://loanappbe.herokuapp.com";
 
 const Loan = (props) => {
   // const [showOrHideModal, setShowOrHideMode] = useState(props.onHide())
