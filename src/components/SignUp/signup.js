@@ -2,6 +2,17 @@ import React, { useState } from "react";
 import { Container, Form, Col, Row, Button, InputGroup } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
+import axios from 'axios'
+// axios({
+// 	baseURL: API_URL,
+// 	url: url,
+// 	method: method,
+// 	data: data,
+// 	headers: {
+// 		Authorization: `Bearer ${TOKEN}`,
+// 		"Content-Type": "application/json",
+// 	},
+// });
 
 import "./signup.css";
 import Hr from "../utils/hr";
@@ -29,19 +40,30 @@ const SignUp = () => {
 
 const handleSubmit = async (e) => {
   e.preventDefault();
-  const requestOptions = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
-  };
-  const fetchdata = await fetch(
-    `${BASEURL2}/api/signup`,
-    requestOptions
-  );
-  const jsonData = await fetchdata.json();
+    const fetchdata = await axios({
+		baseURL: BASEURL2,
+		url: "/api/signup",
+		method: "POST",
+		data: formData,
+		headers: {
+			// Authorization: `Bearer ${TOKEN}`,
+			"Content-Type": "application/json",
+		},
+	});
+  // const requestOptions = {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify(formData),
+  // };
+  // const fetchdata = await fetch(
+  //   `${BASEURL2}/api/signup`,
+  //   requestOptions
+  // );
+  const jsonData = await fetchdata.data;
   setLoginData(jsonData);
+  console.log(jsonData);
 };
 
 	return (

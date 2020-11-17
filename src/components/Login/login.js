@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from 'axios';
 import InputGroup from "react-bootstrap/InputGroup";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
@@ -28,19 +29,28 @@ const Login = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
-		const requestOptions = {
+    const fetchdata = await axios({
+			baseURL: BASEURL2,
+			url: "/api/login",
 			method: "POST",
+			data: formObj,
 			headers: {
-        "Content-Type": "application/json",
+				// Authorization: `Bearer ${TOKEN}`,
+				"Content-Type": "application/json",
 			},
-			body: JSON.stringify(formObj),
-		};
-		const fetchdata = await fetch(
-			`${BASEURL2}/api/login`,
-			requestOptions
-		);
-		const jsonData = await fetchdata.json();
+		});
+		// const requestOptions = {
+		// 	method: "POST",
+		// 	headers: {
+    //     "Content-Type": "application/json",
+		// 	},
+		// 	body: JSON.stringify(formObj),
+		// };
+		// const fetchdata = await fetch(
+		// 	`${BASEURL2}/api/login`,
+		// 	requestOptions
+		// );
+		const jsonData = await fetchdata.data;
 		setBackendVal(jsonData);
 
 		if (jsonData.success === true) {

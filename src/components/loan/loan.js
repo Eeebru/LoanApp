@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Col, Button, Modal, Toast } from "react-bootstrap";
 import RangeSlider from "react-bootstrap-range-slider";
+import axios from 'axios';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 // import addLocalstorage from "../utils/localstorage";
@@ -43,19 +44,30 @@ const Loan = (props) => {
 	};
 
 	const handleSubmit = async () => {
-    const requestOptions = {
+
+    const fetchdata = await axios({
+			baseURL: BASEURL2,
+			url: "/api/takeloan",
 			method: "POST",
+			data: loanObj,
 			headers: {
-        "Content-Type": "application/json",
-				authorization: `Bearer ${JSON.parse(localStorage.getItem("loginData")).token}`,
+				Authorization: `Bearer ${JSON.parse(localStorage.getItem("loginData")).token}`,
+				"Content-Type": "application/json",
 			},
-			body: JSON.stringify(loanObj),
-		};
-		const fetchdata = await fetch(
-			`${BASEURL2}/api/takeloan`,
-			requestOptions
-		);
-		const jsonData = await fetchdata.json();
+		});
+    // const requestOptions = {
+		// 	method: "POST",
+		// 	headers: {
+    //     "Content-Type": "application/json",
+		// 		authorization: `Bearer ${JSON.parse(localStorage.getItem("loginData")).token}`,
+		// 	},
+		// 	body: JSON.stringify(loanObj),
+		// };
+		// const fetchdata = await fetch(
+		// 	`${BASEURL2}/api/takeloan`,
+		// 	requestOptions
+		// );
+		const jsonData = await fetchdata.data;
     setBackendVal(jsonData);
     console.log(jsonData);
 
