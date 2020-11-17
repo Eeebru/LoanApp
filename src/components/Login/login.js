@@ -32,7 +32,8 @@ const Login = () => {
 		const requestOptions = {
 			method: "POST",
 			headers: {
-				"Content-Type": "application/json",
+        "Content-Type": "application/json",
+        "Accept": "application/json",
 				"Access-Control-Allow-Origin": "*",
 			},
 			body: JSON.stringify(formObj),

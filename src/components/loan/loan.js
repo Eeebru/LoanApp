@@ -46,7 +46,8 @@ const Loan = (props) => {
     const requestOptions = {
 			method: "POST",
 			headers: {
-				"Content-Type": "application/json",
+        "Content-Type": "application/json",
+        "Accept": "application/json",
 				"Access-Control-Allow-Origin": "*",
 				authorization: `Bearer ${JSON.parse(localStorage.getItem("loginData")).token}`,
 			},
