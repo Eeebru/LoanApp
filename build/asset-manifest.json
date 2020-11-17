@@ -1,28 +1,28 @@
 {
   "files": {
-    "main.css": "/static/css/main.7b34374f.chunk.css",
-    "main.js": "/static/js/main.67635d76.chunk.js",
-    "main.js.map": "/static/js/main.67635d76.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.75348638.js",
-    "runtime-main.js.map": "/static/js/runtime-main.75348638.js.map",
-    "static/css/2.1d632f7f.chunk.css": "/static/css/2.1d632f7f.chunk.css",
-    "static/js/2.863538e2.chunk.js": "/static/js/2.863538e2.chunk.js",
-    "static/js/2.863538e2.chunk.js.map": "/static/js/2.863538e2.chunk.js.map",
-    "static/js/3.1aaa5e86.chunk.js": "/static/js/3.1aaa5e86.chunk.js",
-    "static/js/3.1aaa5e86.chunk.js.map": "/static/js/3.1aaa5e86.chunk.js.map",
+    "main.css": "/static/css/main.1acbb3d3.chunk.css",
+    "main.js": "/static/js/main.1921abe1.chunk.js",
+    "main.js.map": "/static/js/main.1921abe1.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.b1aa9c5b.js",
+    "runtime-main.js.map": "/static/js/runtime-main.b1aa9c5b.js.map",
+    "static/css/2.6ce7ae73.chunk.css": "/static/css/2.6ce7ae73.chunk.css",
+    "static/js/2.476979bf.chunk.js": "/static/js/2.476979bf.chunk.js",
+    "static/js/2.476979bf.chunk.js.map": "/static/js/2.476979bf.chunk.js.map",
+    "static/js/3.c4269957.chunk.js": "/static/js/3.c4269957.chunk.js",
+    "static/js/3.c4269957.chunk.js.map": "/static/js/3.c4269957.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/2.1d632f7f.chunk.css.map": "/static/css/2.1d632f7f.chunk.css.map",
-    "static/css/main.7b34374f.chunk.css.map": "/static/css/main.7b34374f.chunk.css.map",
-    "static/js/2.863538e2.chunk.js.LICENSE.txt": "/static/js/2.863538e2.chunk.js.LICENSE.txt",
+    "static/css/2.6ce7ae73.chunk.css.map": "/static/css/2.6ce7ae73.chunk.css.map",
+    "static/css/main.1acbb3d3.chunk.css.map": "/static/css/main.1acbb3d3.chunk.css.map",
+    "static/js/2.476979bf.chunk.js.LICENSE.txt": "/static/js/2.476979bf.chunk.js.LICENSE.txt",
     "static/media/login.css": "/static/media/loginBG.e23f6f9e.png",
     "static/media/mastercard.6aa8bd45.jpg": "/static/media/mastercard.6aa8bd45.jpg",
     "static/media/signup.css": "/static/media/signupbg.ee09e65e.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.75348638.js",
-    "static/css/2.1d632f7f.chunk.css",
-    "static/js/2.863538e2.chunk.js",
-    "static/css/main.7b34374f.chunk.css",
-    "static/js/main.67635d76.chunk.js"
+    "static/js/runtime-main.b1aa9c5b.js",
+    "static/css/2.6ce7ae73.chunk.css",
+    "static/js/2.476979bf.chunk.js",
+    "static/css/main.1acbb3d3.chunk.css",
+    "static/js/main.1921abe1.chunk.js"
   ]
 }
