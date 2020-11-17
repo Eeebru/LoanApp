@@ -38,7 +38,7 @@ const SignUp = () => {
 			body: JSON.stringify(formData),
 		};
 		const fetchdata = await fetch(
-			`https:loanappbe.herokuapp.com/api/signup`,
+			`api/signup`,
 			requestOptions
 		);
 		const jsonData = await fetchdata.json();

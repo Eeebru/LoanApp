@@ -53,7 +53,7 @@ const Loan = (props) => {
 			body: JSON.stringify(loanObj),
 		};
 		const fetchdata = await fetch(
-			`https:loanappbe.herokuapp.com/api/takeloan`,
+			`api/takeloan`,
 			requestOptions
 		);
 		const jsonData = await fetchdata.json();
