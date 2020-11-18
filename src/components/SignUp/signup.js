@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container, Form, Col, Row, Button, InputGroup } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
-import axios from 'axios'
+import axios from "axios";
 // axios({
 // 	baseURL: API_URL,
 // 	url: url,
@@ -40,16 +40,16 @@ const SignUp = () => {
 
 const handleSubmit = async (e) => {
   e.preventDefault();
-    const fetchdata = await axios({
-		baseURL: BASEURL2,
-		url: "/api/signup",
-		method: "POST",
-		data: formData,
-		headers: {
-			// Authorization: `Bearer ${TOKEN}`,
-			"Content-Type": "application/json",
-		},
-	});
+  const fetchdata = await axios({
+    baseURL: BASEURL2,
+    url: "/api/signup",
+    method: "POST",
+    data: JSON.stringify(formData),
+    headers: {
+      // Authorization: `Bearer ${TOKEN}`,
+      "Content-Type": "application/json",
+    },
+  });
   // const requestOptions = {
   //   method: "POST",
   //   headers: {
@@ -61,6 +61,7 @@ const handleSubmit = async (e) => {
   //   `${BASEURL2}/api/signup`,
   //   requestOptions
   // );
+  console.log(fetchdata);
   const jsonData = await fetchdata.data;
   setLoginData(jsonData);
   console.log(jsonData);
@@ -180,7 +181,10 @@ const handleSubmit = async (e) => {
 						</div>
 					</Form>
 					<div className='text-center'>
-						<h6 style={{color: loginData.success === false? 'red' : 'green'}}>{loginData ? loginData.message : null}</h6>
+						<h6
+							style={{ color: loginData.success === false ? "red" : "green" }}>
+							{loginData ? loginData.message : null}
+						</h6>
 					</div>
 				</div>
 			</Container>
