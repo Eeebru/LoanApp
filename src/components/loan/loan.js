@@ -4,16 +4,11 @@ import RangeSlider from "react-bootstrap-range-slider";
 import axios from 'axios';
 
 import "bootstrap/dist/css/bootstrap.min.css";
-// import addLocalstorage from "../utils/localstorage";
 import "./loan.css";
 import ColoredLine from "../utils/hr";
 
-
-// const BASEURL = "http://localhost:1111";
 const BASEURL2 = "https://loanappbe.herokuapp.com";
-
 const Loan = (props) => {
-  // const [showOrHideModal, setShowOrHideMode] = useState(props.onHide())
 	const [backendVal, setBackendVal] = useState("");
 	const [showAlert, setShowAlert] = useState(false);
 	const [rangeValue, setRangeValue] = useState(3000);
@@ -44,7 +39,6 @@ const Loan = (props) => {
 	};
 
 	const handleSubmit = async () => {
-
     const fetchdata = await axios({
 			baseURL: BASEURL2,
 			url: "/api/takeloan",
@@ -54,19 +48,8 @@ const Loan = (props) => {
 				Authorization: `Bearer ${JSON.parse(localStorage.getItem("loginData")).token}`,
 				"Content-Type": "application/json",
 			},
-		});
-    // const requestOptions = {
-		// 	method: "POST",
-		// 	headers: {
-    //     "Content-Type": "application/json",
-		// 		authorization: `Bearer ${JSON.parse(localStorage.getItem("loginData")).token}`,
-		// 	},
-		// 	body: JSON.stringify(loanObj),
-		// };
-		// const fetchdata = await fetch(
-		// 	`${BASEURL2}/api/takeloan`,
-		// 	requestOptions
-		// );
+    });
+    
 		const jsonData = await fetchdata.data;
     setBackendVal(jsonData);
     console.log(jsonData);

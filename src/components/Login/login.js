@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import InputGroup from "react-bootstrap/InputGroup";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
@@ -18,48 +18,47 @@ const BASEURL2 = "https://loanappbe.herokuapp.com";
 
 const Login = () => {
 	const history = useHistory();
+	const [btnLoading, setBtnLoading] = useState(false);
 	const [formPhone, setFormPhone] = useState("");
 	const [formPass, setFormPass] = useState("");
 	const [backendVal, setBackendVal] = useState("");
 
-	const formObj = {
+	const formData = {
 		phone: formPhone,
 		password: formPass,
 	};
 
 	const handleSubmit = async (e) => {
+		setBtnLoading(true);
 		e.preventDefault();
-    const fetchdata = await axios({
-			baseURL: BASEURL2,
-			url: "/api/login",
-			method: "POST",
-			data: formObj,
-			headers: {
-				// Authorization: `Bearer ${TOKEN}`,
-				"Content-Type": "application/json",
-			},
-		});
-		// const requestOptions = {
-		// 	method: "POST",
-		// 	headers: {
-    //     "Content-Type": "application/json",
-		// 	},
-		// 	body: JSON.stringify(formObj),
-		// };
-		// const fetchdata = await fetch(
-		// 	`${BASEURL2}/api/login`,
-		// 	requestOptions
-		// );
-		const jsonData = await fetchdata.data;
-		setBackendVal(jsonData);
-
-		if (jsonData.success === true) {
-			addLocalstorage(jsonData, "loginData");
-			history.push("/dashboard");
+		try {
+			const fetchdata = await axios({
+				baseURL: BASEURL2,
+				url: "/api/login",
+				method: "POST",
+				data: JSON.stringify(formData),
+				headers: {
+					"Content-Type": "application/json",
+				},
+			});
+			const jsonData = await fetchdata.data;
+			if (jsonData) {
+				setBackendVal(jsonData);
+				setBtnLoading(false);
+				if (jsonData.success === true) {
+					addLocalstorage(jsonData, "loginData");
+					history.push("/dashboard");
+				}
+			}
+		} catch (error) {
+			const res = error.response;
+			if (res) {
+				setBackendVal(res.data);
+				setBtnLoading(false);
+			}
 		}
 	};
 
-	console.log(backendVal);
 	return (
 		<div className='loginParentDiv'>
 			<Container className='loginContainerDiv'>
@@ -112,13 +111,13 @@ const Login = () => {
 									</Col>
 								</Form.Group>
 								<Button
-									// disabled={isLoading}
+									disabled={btnLoading}
 									onClick={handleSubmit}
 									type='submit'
 									variant='flat'
 									className='btn-flat'
 									block>
-									{"Login"}
+									{!btnLoading ? "Login" : "Please Wait"}
 								</Button>
 								<div className='d-flex justify-content-end mt-2'>
 									<p style={{ fontSize: "14px" }}>
@@ -130,7 +129,9 @@ const Login = () => {
 								</div>
 							</Form>
 							<div className='text-center'>
-								<h6 style={{color: 'red'}}>{!backendVal.success ? backendVal.message : null}</h6>
+								<h6 style={{ color: "red" }}>
+									{!backendVal.success ? backendVal.message : null}
+								</h6>
 							</div>
 						</div>
 					</Col>

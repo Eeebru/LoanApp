@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import dayjs from "dayjs";
 import { Col, Row, Card, Container, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { usePaystackPayment } from "react-paystack";
 
@@ -11,43 +12,64 @@ import DashModal from "./modal";
 import Loan from "../loan/loan";
 import WithAuth from "../utils/routeAuth";
 
-// message: "Approved";
-// reference: "1605558044516";
-// status: "success";
-// trans: "886933000";
-// transaction: "886933000";
-// trxref: "1605558044516";
-
 const config = {
 	reference: new Date().getTime(),
 	email: "user@example.com",
 	amount: 20000,
 	publicKey: "pk_test_61b233a715355010831dd3c09fc9888ee64f6f3d",
 };
+const BASEURL = "https://loanappbe.herokuapp.com";
 
 const Dashboard = () => {
-	// const userLoans = JSON.parse(localStorage.getItem('loanData'))
 	const userData = JSON.parse(localStorage.getItem("loginData"));
 	const [modalShow, setModalShow] = React.useState(false);
 	const [loanModalShow, setloanModalShow] = React.useState(false);
 	const [showLoanBtn, setShowLoanBtn] = React.useState(false);
+	const [refObj, setRefObj] = React.useState(false);
 
-	// you can call this function anything
-	const onSuccess = (reference) => {
-		// Implementation for whatever you want to do with reference and after success call.
-		console.log(reference);
-		if (reference.status === "success") {
-			setShowLoanBtn(true);
+	//initialize paystack
+	const initializePayment = usePaystackPayment(config);
+	// When successful
+	const onSuccess = (ref) => {
+		if (ref.status === "success") {
+      setShowLoanBtn(true);
+			//set ref obj to state,to be able to send to db
+			setRefObj(ref);
 		}
 	};
+
+	// when the inline pop closed
 	const onClose = () => {
-		// implementation for  whatever you want to do when the Paystack dialog closed.
-		console.log("closed");
+		console.log("close");
 	};
-	const initializePayment = usePaystackPayment(config);
 
-	const loansArray = userData.loan;
+	// send the reference object from paystack to db
+	useEffect(() => {
+		try {
+			axios({
+				baseURL: BASEURL,
+				url: "/api/savecard",
+				method: "POST",
+				data: JSON.stringify({ reference: refObj.reference }),
+				headers: {
+					Authorization: `Bearer ${
+						JSON.parse(localStorage.getItem("loginData")).token
+					}`,
+					"Content-Type": "application/json",
+				},
+			}).then((res) => console.log("done", res));
+		} catch (error) {
+			console.log(error.response);
+		}
+  }, [refObj]);
+  
+  /* possible work is add user to the savecard post req, 
+  make loanArray a localstate, make it serve the table from 
+  userData on first render, reset its state when save card 
+  returns the user obj
+  */
 
+  const loansArray = userData.loan;
 	return (
 		<div>
 			<Container className='p-4'>
@@ -85,7 +107,7 @@ const Dashboard = () => {
 						</Card>
 					</Col>
 					<Col md={{ span: 4, offset: 3 }}>
-						{showLoanBtn || loansArray.length > 0 ? (
+						{userData.user.reference || showLoanBtn ? (
 							<div>
 								<h3 className='py-3' style={{ textAlign: "center" }}>
 									We are here for you.
@@ -95,7 +117,7 @@ const Dashboard = () => {
 										onClick={() => setloanModalShow(true)}
 										// to='/loan'
 										className='getStart'>
-										Take a Loan
+										Take a loan now
 									</Link>
 								</div>
 							</div>
@@ -162,7 +184,7 @@ const Dashboard = () => {
 							})
 						) : (
 							<tr>
-								<td colspan='7'>
+								<td colSpan='7'>
 									<h4>You have no loan history yet.</h4>
 								</td>
 							</tr>

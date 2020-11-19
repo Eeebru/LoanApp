@@ -21,6 +21,7 @@ import Hr from "../utils/hr";
 const BASEURL2 = "https://loanappbe.herokuapp.com";
 
 const SignUp = () => {
+	const [btnLoading, setBtnLoading] = useState(false);
 	const [loginData, setLoginData] = useState(false);
 	const [formName, setFormName] = useState(null);
 	const [formPhone, setFormPhone] = useState(null);
@@ -38,34 +39,32 @@ const SignUp = () => {
 		confirmPass: formConfirmPass,
 	};
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  const fetchdata = await axios({
-    baseURL: BASEURL2,
-    url: "/api/signup",
-    method: "POST",
-    data: JSON.stringify(formData),
-    headers: {
-      // Authorization: `Bearer ${TOKEN}`,
-      "Content-Type": "application/json",
-    },
-  });
-  // const requestOptions = {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify(formData),
-  // };
-  // const fetchdata = await fetch(
-  //   `${BASEURL2}/api/signup`,
-  //   requestOptions
-  // );
-  console.log(fetchdata);
-  const jsonData = await fetchdata.data;
-  setLoginData(jsonData);
-  console.log(jsonData);
-};
+	const handleSubmit = async (e) => {
+		setBtnLoading(true);
+		e.preventDefault();
+		try {
+			const fetchdata = await axios({
+				baseURL: BASEURL2,
+				url: "/api/signup",
+				method: "POST",
+				data: JSON.stringify(formData),
+				headers: {
+					"Content-Type": "application/json",
+				},
+			});
+			if (fetchdata.data) {
+				setLoginData(fetchdata.data);
+				setBtnLoading(false);
+			}
+		} catch (error) {
+			const res = error.response;
+			if (res) {
+				console.log(res);
+				setLoginData(res.data);
+				setBtnLoading(false);
+			}
+		}
+	};
 
 	return (
 		<div className=' parentDiv'>
@@ -166,10 +165,10 @@ const handleSubmit = async (e) => {
 							type='submit'
 							variant='signup'
 							className='btn-signup'
-							disabled={loginData}
+							disabled={btnLoading}
 							onClick={handleSubmit}
 							block>
-							{!loginData ? "Register" : "Please Wait"}
+							{!btnLoading ? "Register" : "Please Wait"}
 						</Button>
 						<div className='d-flex justify-content-end mt-2'>
 							<p style={{ fontSize: "14px" }}>
