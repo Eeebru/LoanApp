@@ -5,6 +5,7 @@ import Login from './components/Login/login';
 import Dashboard from './components/Dashboard/dashboard';
 import Loan from './components/loan/loan';
 import EmailConfirm from './components/confirmMail/confirmMail';
+import Spinner from './components/spinner/spinner';
 // import ReuseToaster from './components/toaster/toasts';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <Route path='/dashboard' component={Dashboard}/>
       <Route path='/loan' component={Loan}/>
       <Route path='/changepass' component={EmailConfirm}/>
+      <Route path='/spin' component={Spinner}/>
     </Switch>
     </>
   );
